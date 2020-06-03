@@ -10,6 +10,7 @@ class MentionBlot extends Embed {
     denotationChar.innerHTML = data.denotationChar;
     node.appendChild(denotationChar);
     node.innerHTML += data.value;
+    node.className = "matei-class";
     return MentionBlot.setDataValues(node, data);
   }
 
@@ -28,6 +29,6 @@ class MentionBlot extends Embed {
 
 MentionBlot.blotName = "mention";
 MentionBlot.tagName = "span";
-MentionBlot.className = "mention";
+// MentionBlot.className = "mention";
 
 Quill.register(MentionBlot);
