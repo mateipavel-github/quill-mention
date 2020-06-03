@@ -10,7 +10,7 @@ class MentionBlot extends Embed {
     denotationChar.innerHTML = data.denotationChar;
     node.appendChild(denotationChar);
     node.innerHTML += data.value;
-    node.className = "matei-class";
+    node.className = "cssClass" in data ? data.cssClass : "mention";
     return MentionBlot.setDataValues(node, data);
   }
 
@@ -25,6 +25,7 @@ class MentionBlot extends Embed {
   static value(domNode) {
     return domNode.dataset;
   }
+
 }
 
 MentionBlot.blotName = "mention";

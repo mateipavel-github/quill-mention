@@ -37,7 +37,8 @@
   "scripts": {
     "start": "concurrently \"rollup -c -w\" \"serve docs\"",
     "build": "rollup -c",
-    "test": "ava"
+    "test": "ava",
+    "prepare": "npm run build"
   },
   "ava": {
     "require": [
