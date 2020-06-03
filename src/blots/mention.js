@@ -10,7 +10,10 @@ class MentionBlot extends Embed {
     denotationChar.innerHTML = data.denotationChar;
     node.appendChild(denotationChar);
     node.innerHTML += data.value;
-    node.className = "cssClass" in data ? data.cssClass : "mention";
+    node.classList.add("mention");
+    if ("type" in data) {
+      node.classList.add("mention-" + data.type);
+    }
     return MentionBlot.setDataValues(node, data);
   }
 
