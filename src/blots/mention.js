@@ -11,9 +11,20 @@ class MentionBlot extends Embed {
     node.appendChild(denotationChar);
     node.innerHTML += data.value;
     node.classList.add("mention");
+
+    console.log("mention.js", data);
     if ("type" in data) {
       node.classList.add("mention-" + data.type);
     }
+
+    var tagClickEvent = new CustomEvent("tagClick");
+    node.addEventListener("click", function (e) {
+      let blot = Quill.find(node);
+      node.dispatchEvent(tagClickEvent, {
+        detail: blot
+      });
+    });
+
     return MentionBlot.setDataValues(node, data);
   }
 
@@ -28,7 +39,6 @@ class MentionBlot extends Embed {
   static value(domNode) {
     return domNode.dataset;
   }
-
 }
 
 MentionBlot.blotName = "mention";
