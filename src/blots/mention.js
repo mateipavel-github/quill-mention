@@ -17,11 +17,14 @@ class MentionBlot extends Embed {
       node.classList.add("mention-" + data.type);
     }
 
-    var tagClickEvent = new CustomEvent("tagClick");
+    var tagClickEvent = new CustomEvent("tagClick", {
+      detail: {
+        node: node,
+        data: data
+      }
+    });
     node.addEventListener("click", function (e) {
-      document.dispatchEvent(tagClickEvent, {
-        detail: data
-      });
+      document.dispatchEvent(tagClickEvent);
     });
 
     return MentionBlot.setDataValues(node, data);
