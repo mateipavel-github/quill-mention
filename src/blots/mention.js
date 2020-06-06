@@ -20,8 +20,9 @@ class MentionBlot extends Embed {
     var tagClickEvent = new CustomEvent("tagClick");
     node.addEventListener("click", function (e) {
       let blot = Quill.find(node);
-      node.dispatchEvent(tagClickEvent, {
-        detail: blot
+      document.dispatchEvent(tagClickEvent, {
+        detail: blot,
+        clickEvent: e
       });
     });
 
