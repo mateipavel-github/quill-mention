@@ -1,9 +1,8 @@
 import Quill from "quill";
-import Parchment from "parchment";
 
-// const Embed = Quill.import("blots/embed");
+const Embed = Quill.import("blots/embed");
 
-class MentionBlot extends Parchment.inline {
+class MentionBlot extends Embed {
   static create(data) {
     const node = super.create();
     const denotationChar = document.createElement("span");
@@ -41,27 +40,6 @@ class MentionBlot extends Parchment.inline {
   static value(domNode) {
     return domNode.dataset;
   }
-
-  static formats(domNode) {
-    return domNode.dataset || true;
-  }
-
-  format(name, value) {
-    if (name === "mention" && value) {
-      const keys = Object.keys(value);
-      keys.forEach(k => {
-        this.domNode.dataset[k] = value[k];
-      });
-    } else {
-      super.format(name, value);
-    }
-  }
-
-  formats() {
-    let formats = super.formats();
-    formats["mention"] = MentionBlot.formats(this.domNode);
-    return formats;
-  }
 }
 
 MentionBlot.blotName = "mention";
@@ -69,4 +47,3 @@ MentionBlot.tagName = "span";
 // MentionBlot.className = "mention";
 
 Quill.register(MentionBlot);
-Parchment.register(MentionBlot);
