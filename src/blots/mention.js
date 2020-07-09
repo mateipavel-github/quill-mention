@@ -5,7 +5,7 @@ const Embed = Quill.import("blots/embed");
 class MentionBlot extends Embed {
   static create(data) {
     const node = super.create();
-    const denotationChar = document.createElement("span");
+    const denotationChar = document.createElement("tag");
     denotationChar.className = "ql-mention-denotation-char";
     denotationChar.innerHTML = data.denotationChar;
     node.appendChild(denotationChar);
@@ -22,7 +22,7 @@ class MentionBlot extends Embed {
         data: data
       }
     });
-    node.addEventListener("click", function (e) {
+    node.addEventListener("click", function () {
       document.dispatchEvent(tagClickEvent);
     });
 
@@ -43,7 +43,7 @@ class MentionBlot extends Embed {
 }
 
 MentionBlot.blotName = "mention";
-MentionBlot.tagName = "span";
+MentionBlot.tagName = "tag";
 // MentionBlot.className = "mention";
 
 Quill.register(MentionBlot);

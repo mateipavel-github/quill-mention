@@ -54,15 +54,15 @@ class Mention {
     };
 
     Object.assign(this.options, options, {
-      dataAttributes: Array.isArray(options.dataAttributes)
-        ? this.options.dataAttributes.concat(options.dataAttributes)
-        : this.options.dataAttributes
+      dataAttributes: Array.isArray(options.dataAttributes) ?
+        this.options.dataAttributes.concat(options.dataAttributes) :
+        this.options.dataAttributes
     });
 
     this.mentionContainer = document.createElement("div");
-    this.mentionContainer.className = this.options.mentionContainerClass
-      ? this.options.mentionContainerClass
-      : "";
+    this.mentionContainer.className = this.options.mentionContainerClass ?
+      this.options.mentionContainerClass :
+      "";
     this.mentionContainer.style.cssText = "display: none; position: absolute;";
     this.mentionContainer.onmousemove = this.onContainerMouseMove.bind(this);
 
@@ -71,9 +71,9 @@ class Mention {
     }
 
     this.mentionList = document.createElement("ul");
-    this.mentionList.className = this.options.mentionListClass
-      ? this.options.mentionListClass
-      : "";
+    this.mentionList.className = this.options.mentionListClass ?
+      this.options.mentionListClass :
+      "";
     this.mentionContainer.appendChild(this.mentionList);
 
     this.quill.container.appendChild(this.mentionContainer);
@@ -81,8 +81,7 @@ class Mention {
     quill.on("text-change", this.onTextChange.bind(this));
     quill.on("selection-change", this.onSelectionChange.bind(this));
 
-    quill.keyboard.addBinding(
-      {
+    quill.keyboard.addBinding({
         key: Keys.TAB
       },
       this.selectHandler.bind(this)
@@ -91,8 +90,7 @@ class Mention {
       quill.keyboard.bindings[Keys.TAB].pop()
     );
 
-    quill.keyboard.addBinding(
-      {
+    quill.keyboard.addBinding({
         key: Keys.ENTER
       },
       this.selectHandler.bind(this)
@@ -101,22 +99,19 @@ class Mention {
       quill.keyboard.bindings[Keys.ENTER].pop()
     );
 
-    quill.keyboard.addBinding(
-      {
+    quill.keyboard.addBinding({
         key: Keys.ESCAPE
       },
       this.escapeHandler.bind(this)
     );
 
-    quill.keyboard.addBinding(
-      {
+    quill.keyboard.addBinding({
         key: Keys.UP
       },
       this.upHandler.bind(this)
     );
 
-    quill.keyboard.addBinding(
-      {
+    quill.keyboard.addBinding({
         key: Keys.DOWN
       },
       this.downHandler.bind(this)
@@ -192,7 +187,9 @@ class Mention {
   }
 
   getItemData() {
-    const { link } = this.mentionList.childNodes[this.itemIndex].dataset;
+    const {
+      link
+    } = this.mentionList.childNodes[this.itemIndex].dataset;
     const hasLinkValue = typeof link !== "undefined";
     const itemTarget = this.mentionList.childNodes[this.itemIndex].dataset
       .target;
@@ -279,9 +276,9 @@ class Mention {
 
       for (let i = 0; i < data.length; i += 1) {
         const li = document.createElement("li");
-        li.className = this.options.listItemClass
-          ? this.options.listItemClass
-          : "";
+        li.className = this.options.listItemClass ?
+          this.options.listItemClass :
+          "";
         li.dataset.index = i;
         li.innerHTML = this.options.renderItem(data[i], searchTerm);
         li.onmouseenter = this.onItemMouseEnter.bind(this);
@@ -407,12 +404,12 @@ class Mention {
     }
 
     if (topPos >= 0) {
-      this.options.mentionContainerClass.split(' ').forEach(className => {
+      this.options.mentionContainerClass.split(" ").forEach(className => {
         this.mentionContainer.classList.add(`${className}-bottom`);
         this.mentionContainer.classList.remove(`${className}-top`);
       });
     } else {
-      this.options.mentionContainerClass.split(' ').forEach(className => {
+      this.options.mentionContainerClass.split(" ").forEach(className => {
         this.mentionContainer.classList.add(`${className}-top`);
         this.mentionContainer.classList.remove(`${className}-bottom`);
       });
@@ -439,7 +436,10 @@ class Mention {
 
     this.cursorPos = range.index;
     const textBeforeCursor = this.getTextBeforeCursor();
-    const { mentionChar, mentionCharIndex } = getMentionCharIndex(
+    const {
+      mentionChar,
+      mentionCharIndex
+    } = getMentionCharIndex(
       textBeforeCursor,
       this.options.mentionDenotationChars
     );
